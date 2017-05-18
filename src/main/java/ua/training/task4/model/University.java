@@ -20,65 +20,32 @@ public class University {
 		return name;
 	}
 
-	public synchronized void acceptStudent(DocumentsStorage documentsStorage) { // TODO
-																				// REDO
-		if (criteria.equals(Criteria.ONLY_BIO)) {
-			while (documentsStorage.checkNextDocument(Faculty.BIOLOGY)) {
+	public ArrayList<Document> getDocuments() {
+		return documents;
+	}
+
+	public void acceptStudent(DocumentsStorage documentsStorage) {
+
+		if (criteria.equals(Criteria.ONLY_BIOLOGY)) {
+			while (documentsStorage.isNextDocumentValid(Faculty.BIOLOGY)) {
 				documents.add(documentsStorage.getDocument());
 			}
 		}
+
 		if (criteria.equals(Criteria.ONLY_MATH)) {
-			while (documentsStorage.checkNextDocument(Faculty.MATH)) {
+			while (documentsStorage.isNextDocumentValid(Faculty.MATH)) {
 				documents.add(documentsStorage.getDocument());
 			}
 		}
+
 		if (criteria.equals(Criteria.RANDOM)) {
-			int amount = new Random().nextInt(RANDOM_TOP_CAP) + RANDOM_BOTTOM_CAP;
-			for (int i = 0; i < amount; i++) {
+			int random_amount = new Random().nextInt(RANDOM_TOP_CAP) + RANDOM_BOTTOM_CAP;
+			for (int i = 0; i < random_amount; i++) {
 				if (!documentsStorage.isQueueEmpty()) {
 					documents.add(documentsStorage.getDocument());
 				}
 			}
 		}
-
-		// if (criteria.equals(Criteria.ONLY_BIO)) {
-		// boolean condition = true;
-		// while (condition) {
-		// if (!documentsStorage.isQueueEmpty()) {
-		// if (documentsStorage.peek().getFaculty().equals(Faculty.BIOLOGY)) {
-		// documents.add(documentsStorage.getDocument());
-		// } else {
-		// condition = false;
-		// }
-		// }
-		// }
-		// }
-		//
-		// if (criteria.equals(Criteria.ONLY_MATH)) {
-		// boolean condition = true;
-		// while (condition) {
-		// if (!documentsStorage.isQueueEmpty()) {
-		// if (documentsStorage.peek().getFaculty().equals(Faculty.MATH)) {
-		// documents.add(documentsStorage.getDocument());
-		// } else {
-		// condition = false;
-		// }
-		// }
-		// }
-		// }
-		// if (criteria.equals(Criteria.RANDOM)) {
-		// int amount = new Random().nextInt(RANDOM_TOP_CAP) +
-		// RANDOM_BOTTOM_CAP;
-		// for (int i = 0; i < amount; i++) {
-		// if (!documentsStorage.isQueueEmpty()) {
-		// documents.add(documentsStorage.getDocument());
-		// }
-		// }
-		//
-		// }
 	}
 
-	public ArrayList<Document> getDocuments() {
-		return documents;
-	}
 }

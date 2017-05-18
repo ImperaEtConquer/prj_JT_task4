@@ -12,15 +12,11 @@ public class DocumentsStorage {
 	private ConcurrentLinkedQueue<Document> queue;
 
 	public DocumentsStorage() {
-		initAllDocuments();
+		initializeDocuments();
 		this.queue = new ConcurrentLinkedQueue<>();
 	}
 
-	public Document peek() {
-		return queue.peek();
-	}
-
-	public boolean checkNextDocument(Faculty faculty) {
+	public boolean isNextDocumentValid(Faculty faculty) {
 		if (!queue.isEmpty()) {
 			return queue.peek().getFaculty().equals(faculty);
 		} else {
@@ -42,8 +38,8 @@ public class DocumentsStorage {
 
 	public void refillQueue() {
 		if (queue.size() <= QUEUE_LOW_SIZE) {
-			int difference = Math.abs(queue.size() - QUEUE_DEFAULT_SIZE); // TODO
-			for (int i = 0; i < difference; i++) {
+			int amountToAdd = Math.abs(queue.size() - QUEUE_DEFAULT_SIZE);
+			for (int i = 0; i < amountToAdd; i++) {
 				addToQueue();
 			}
 		}
@@ -56,7 +52,7 @@ public class DocumentsStorage {
 		}
 	}
 
-	private void initAllDocuments() {
+	private void initializeDocuments() {
 		this.allDocuments = new ArrayList<>();
 		for (int i = 0; i < BIOLOGY_AMOUNT; i++) {
 			allDocuments.add(new Document(Faculty.BIOLOGY));

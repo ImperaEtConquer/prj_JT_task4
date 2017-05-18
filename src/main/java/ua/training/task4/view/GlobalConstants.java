@@ -8,4 +8,9 @@ public interface GlobalConstants {
 
 	static int RANDOM_BOTTOM_CAP = 1;
 	static int RANDOM_TOP_CAP = 5;
+	
+	static String SCORE_SYMBOL = " : ";
+	
+	static String KPI = "KPI";
+	static int KPI_DELAY = 50;
 }
